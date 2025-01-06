@@ -1,7 +1,9 @@
 const API_KEY = 'c8ddba06'; // Ersätt med din faktiska API-nyckel
 const BASE_URL = 'https://www.omdbapi.com/';
 
-// Hämta filmdata baserat på söksträngen
+let timeout; // Timeout för debounce
+
+// Hämta filmer baserat på en söksträng
 async function fetchMovies(query) {
     try {
         const response = await fetch(`${BASE_URL}?s=${encodeURIComponent(query)}&apikey=${API_KEY}`);
@@ -23,28 +25,51 @@ async function fetchMovies(query) {
     }
 }
 
-// Hämta detaljer om en specifik film
-async function fetchMovieDetails(imdbID) {
-    try {
-        const response = await fetch(`${BASE_URL}?i=${imdbID}&apikey=${API_KEY}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
+// Visa sökresultaten dynamiskt
+async function updateSearchResults(query) {
+    const resultsContainer = document.getElementById('results-container');
+    const countContainer = document.getElementById('count-container');
 
-        const data = await response.json();
-        if (data.Response === 'True') {
-            return data;
-        } else {
-            throw new Error(data.Error);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return null;
+    resultsContainer.innerHTML = '';
+    countContainer.textContent = '';
+
+    if (!query) {
+        countContainer.textContent = 'Börja skriva för att söka på filmer.';
+        return;
+    }
+
+    const movies = await fetchMovies(query);
+    if (movies) {
+        displayMovies(movies);
+        countContainer.textContent = `Hittade ${movies.length} filmer med sökordet "${query}".`;
+    } else {
+        countContainer.textContent = 'No results found.';
     }
 }
 
-// Visa modalen med filmens detaljer
+// Dynamisk uppdatering med debounce
+document.getElementById('search-input').addEventListener('input', (event) => {
+    const query = event.target.value.trim();
+
+    clearTimeout(timeout); // Rensa tidigare timeout
+    timeout = setTimeout(() => {
+        updateSearchResults(query); // Uppdatera sökresultat efter debounce-tiden
+    }, 300); // Vänta 300ms innan ny API-förfrågan
+});
+
+// Visa filmerna i DOM
+function displayMovies(movies) {
+    const resultsContainer = document.getElementById('results-container');
+    resultsContainer.innerHTML = movies.map(movie => `
+        <div class="movie" onclick="showMovieDetails('${movie.imdbID}')">
+            <img src="${movie.Poster}" alt="${movie.Title}" />
+            <h3>${movie.Title}</h3>
+            <p>Year: ${movie.Year}</p>
+        </div>
+    `).join('');
+}
+
+// Funktion för att visa modalen
 async function showMovieDetails(imdbID) {
     const modal = document.getElementById('movie-modal');
     const modalDetails = document.getElementById('modal-details');
@@ -61,47 +86,12 @@ async function showMovieDetails(imdbID) {
             <p><strong>Actors:</strong> ${movie.Actors}</p>
         `;
         modal.classList.remove('hidden');
-        modal.style.display = 'flex'; // Visa modalen
+        modal.style.display = 'flex';
     }
 }
 
-// Stäng modalen
+// Funktion för att stänga modalen
 document.getElementById('close-modal').addEventListener('click', () => {
     const modal = document.getElementById('movie-modal');
     modal.style.display = 'none';
 });
-
-// Hantera sökhändelsen
-document.getElementById('search-button').addEventListener('click', async () => {
-    const query = document.getElementById('search-input').value.trim();
-    const resultsContainer = document.getElementById('results-container');
-    const countContainer = document.getElementById('count-container');
-
-    resultsContainer.innerHTML = '';
-    countContainer.textContent = '';
-
-    if (!query) {
-        countContainer.textContent = 'Please enter a search term.';
-        return;
-    }
-
-    const movies = await fetchMovies(query);
-    if (movies) {
-        displayMovies(movies);
-        countContainer.textContent = `Hittaed ${movies.length} filmer för sökordet "${query}".`;
-    } else {
-        countContainer.textContent = 'No results found.';
-    }
-});
-
-// Visa filmerna i DOM
-function displayMovies(movies) {
-    const resultsContainer = document.getElementById('results-container');
-    resultsContainer.innerHTML = movies.map(movie => `
-        <div class="movie" onclick="showMovieDetails('${movie.imdbID}')">
-            <img src="${movie.Poster}" alt="${movie.Title}" />
-            <h3>${movie.Title}</h3>
-            <p>Year: ${movie.Year}</p>
-        </div>
-    `).join('');
-}
