@@ -19,6 +19,51 @@ main {
     margin: auto;
 }
 
+#results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Anpassar sig till skärmens storlek */
+    gap: 1rem; /* Mellanrum mellan rutorna */
+    margin-top: 1rem;
+}
+
+/* Stil för varje film */
+.movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.movie img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.movie h3 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.movie p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Hover-effekt */
+.movie:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Anpassa input och knapp */
 #search-input {
     width: 70%;
     padding: 0.5rem;
@@ -30,9 +75,16 @@ main {
     background-color: #007BFF;
     color: #fff;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-#results-container {
+#search-button:hover {
+    background-color: #0056b3;
+}
+
+#count-container {
     margin-top: 1rem;
+    font-weight: bold;
+    color: #333;
 }
