@@ -2,13 +2,15 @@
 
 # Filmbilbioteket
 
-En modern och responsiv webbaserad applikation för att söka efter filmer med hjälp av [OMDb API](https://www.omdbapi.com/). Appen låter dig söka efter filmer i realtid, visa detaljer om en specifik film i en modal och navigera enkelt med en stilren och användarvänlig design.
+En modern och responsiv webbaserad applikation för att söka efter filmer med hjälp av 
+[OMDb API](https://www.omdbapi.com/). Tanken är att låta dig söka efter filmer i realtid, 
+visa detaljer om en specifik film i en modal.
 
 ## Funktioner
 - Sök efter filmer dynamiskt medan du skriver.
 - Visa resultat i en responsiv layout som anpassar sig efter skärmstorleken.
 - Klicka på en film för att se detaljer (titel, genre, regissör, handling, och IMDb-betyg) i en modal.
-- Responsiv design inspirerad av Netflix med fokus på användarvänlighet.
+- Responsiv design med fokus på användarvänlighet.
 
 ### Installation
 1. **Kopiera projektet lokalt**:
