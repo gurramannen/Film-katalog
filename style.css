@@ -12,6 +12,7 @@ header {
     position: relative;
     top: 0;
     z-index: 1000;
+    color: red;
 }
 
 .search-container {

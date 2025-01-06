@@ -46,9 +46,9 @@ async function updateSearchResults(query) {
 
     if (movies) {
         displayMovies(movies);
-        countContainer.textContent = `Found ${movies.length} movies for "${query}".`;
+        countContainer.textContent = `Hittade ${movies.length} filmer för sökord "${query}".`;
     } else {
-        countContainer.textContent = 'No results found.';
+        countContainer.textContent = 'Inga resultat hittades.';
     }
 }
 
@@ -131,12 +131,6 @@ function showMovieDetails(imdbID) {
             `;
 
             modal.style.display = 'flex';
-
-            // Stäng modalen när användaren klickar på "x"
-            const closeButton = modal.querySelector('.close');
-            closeButton.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
 
             // Stäng modalen om användaren klickar utanför innehållet
             window.addEventListener('click', (e) => {
