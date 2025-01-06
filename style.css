@@ -1,140 +1,181 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
     margin: 0;
-    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background-color: #141414;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
+    background-color: #141414;
+    padding: 20px;
+    position: relative;
+    top: 0;
+    z-index: 1000;
 }
 
-main {
-    padding: 1rem;
-    max-width: 800px;
-    margin: auto;
-}
-
-#results-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Anpassar sig till skärmens storlek */
-    gap: 1rem; /* Mellanrum mellan rutorna */
-    margin-top: 1rem;
-}
-
-/* Stil för varje film */
-.movie {
+.search-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    justify-content: center;
 }
 
-.movie img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-}
-
-.movie h3 {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-}
-
-.movie p {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* Hover-effekt */
-.movie:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Anpassa input och knapp */
 #search-input {
-    width: 70%;
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-}
-
-#search-button {
-    padding: 0.5rem 1rem;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 15px;
+    font-size: 18px;
     border-radius: 4px;
-    cursor: pointer;
+    border: 1px solid #555;
+    outline: none;
+    background-color: #222;
+    color: #fff;
 }
 
-#search-button:hover {
-    background-color: #0056b3;
+#search-input::placeholder {
+    color: #888;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 #count-container {
-    margin-top: 1rem;
-    font-weight: bold;
-    color: #333;
+    margin: 10px 0;
+    font-size: 18px;
+    color: #ccc;
+    text-align: center;
 }
+
+#loading-indicator {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 20px 0;
+}
+
+/* Movie Grid */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Dynamiskt antal kolumner */
+    gap: 20px; /* Avstånd mellan korten */
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.movie {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.movie img {
+    width: 100%;
+    height: 300px; /* Justera höjden för att matcha bredden */
+    object-fit: cover;
+}
+
+.movie h3 {
+    font-size: 16px; /* Passande textstorlek */
+    margin: 10px;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.movie p {
+    font-size: 14px;
+    margin: 5px 10px;
+    color: #aaa;
+}
+
+.movie .details {
+    margin-top: auto;
+    background-color: #333;
+    padding: 10px;
+    border-top: 1px solid #444;
+    color: #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
 
 /* Modal */
 .modal {
-    display: none; /* Göm modalen som standard */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
+    display: none;
     justify-content: center;
     align-items: center;
+    padding: 10px;
+    overflow: auto; /* För att se till att innehållet inte klipps av */
 }
 
+/* Modalens innehåll */
 .modal-content {
-    background-color: #fff;
-    padding: 1.5rem;
+    background-color: #222;
+    padding: 15px;
     border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    position: relative;
+    max-width: 500px; /* Mindre maxbredd */
+    width: 90%; /* Använd en responsiv bredd */
+    color: #fff;
+    font-size: 14px; /* Lite mindre textstorlek för att få plats med allt */
+    max-height: 80vh; /* Begränsa höjden för att se till att innehållet får plats */
+    overflow-y: auto; /* Lägg till scroll om innehållet blir för stort */
 }
 
+/* Bild i modal */
+.modal-content img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Modalens titel */
+.modal-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Modalens text */
+.modal-content p {
+    margin: 5px 0;
+    font-size: 13px;
+    color: #ddd;
+}
+
+/* Stängningsknapp */
 .close {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 20px;
+    color: #fff;
     cursor: pointer;
-    color: #333;
 }
 
-.modal img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
+.close:hover {
+    color: #f00;
 }
 
-.modal h2 {
-    margin: 0.5rem 0;
-    font-size: 1.5rem;
-}
-
-.modal p {
-    margin: 0.5rem 0;
-    color: #666;
+h1{
+    text-align: center;
 }

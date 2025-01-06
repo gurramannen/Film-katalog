@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmbiblioteket</title>
+    <title>Movie Search</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Filmbiblioteket</h1>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for a movie..." autocomplete="off" />
+        </div>
     </header>
     <main>
-        <input type="text" id="search-input" placeholder="Sök efter en film..." />
-        <button id="search-button">Sök</button>
         <p id="count-container"></p>
-        <div id="results-container"></div>
-    
-        <!-- Modal -->
-        <div id="movie-modal" class="modal hidden">
-            <div class="modal-content">
-                <span id="close-modal" class="close">&times;</span>
-                <div id="modal-details"></div>
-            </div>
-        </div>
+        <div id="loading-indicator" class="hidden"></div>
+        <div id="results-container" class="movie-grid"></div>
     </main>
+
+    <!-- Modal -->
+    <div id="movie-modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <div id="modal-details"></div>
+        </div>
+    </div>
+
     <script src="index.js"></script>
 </body>
 </html>
