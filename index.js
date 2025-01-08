@@ -35,7 +35,7 @@ async function updateSearchResults(query) {
     countContainer.textContent = '';
 
     if (!query) {
-        countContainer.textContent = 'Start typing to search for movies.';
+        countContainer.textContent = 'Börja skriva för att söka på filmer.';
         return;
     }
 
