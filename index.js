@@ -1,9 +1,9 @@
-const API_KEY = 'c8ddba06'; // Ersätt med din faktiska API-nyckel
+const API_KEY = 'c8ddba06'; 
 const BASE_URL = 'https://www.omdbapi.com/';
 
 let timeout; // Timeout för debounce
 
-// Hämta filmer baserat på en söksträng
+
 async function fetchMovies(query) {
     try {
         const response = await fetch(`${BASE_URL}?s=${encodeURIComponent(query)}&apikey=${API_KEY}`);
@@ -25,7 +25,7 @@ async function fetchMovies(query) {
     }
 }
 
-// Visa sökresultaten dynamiskt med laddningsindikator
+// Visa sökresultaten dynamiskt
 async function updateSearchResults(query) {
     const resultsContainer = document.getElementById('results-container');
     const countContainer = document.getElementById('count-container');
@@ -39,10 +39,10 @@ async function updateSearchResults(query) {
         return;
     }
 
-    loadingIndicator.classList.remove('hidden'); // Visa laddningsindikatorn
+    loadingIndicator.classList.remove('hidden'); 
 
     const movies = await fetchMovies(query);
-    loadingIndicator.classList.add('hidden'); // Dölj laddningsindikatorn
+    loadingIndicator.classList.add('hidden'); 
 
     if (movies) {
         displayMovies(movies);
@@ -52,14 +52,14 @@ async function updateSearchResults(query) {
     }
 }
 
-// Dynamisk uppdatering med debounce
+
 document.getElementById('search-input').addEventListener('input', (event) => {
     const query = event.target.value.trim();
 
-    clearTimeout(timeout); // Rensa tidigare timeout
+    clearTimeout(timeout); 
     timeout = setTimeout(() => {
-        updateSearchResults(query); // Uppdatera sökresultat efter debounce-tiden
-    }, 300); // Vänta 300ms innan ny API-förfrågan
+        updateSearchResults(query); 
+    }, 300); 
 });
 
 async function fetchMovieDetails(imdbID) {
@@ -132,7 +132,7 @@ function showMovieDetails(imdbID) {
 
             modal.style.display = 'flex';
 
-            // Stäng modalen om användaren klickar utanför innehållet
+            // Stäng modalen om användaren klickar utanför modalen
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.style.display = 'none';
