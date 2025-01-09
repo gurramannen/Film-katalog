@@ -26,12 +26,12 @@ Uppfyllda krav
 JSON, HTTP/HTTPS & Asynkronitet
 JSON-hantering: Applikationen hämtar filmdata i JSON-format från OMDb API.
 HTTP/HTTPS: Data hämtas via fetch() med en GET-förfrågan.
-Asynkronitet: Användning av async/await och try/catch för att hantera fel på ett användarvänligt sätt. Felmeddelanden visas om nätverket misslyckas, eller om inga sökresultat hittas.
+Asynkronitet: Användning av async/await och try/catch för att hantera fel. Felmeddelanden visas om inga sökresultat hittas.
 UX/UI och Responsivitet
-Designen är inspirerad av Netflix och anpassar sig efter olika skärmstorlekar (desktop, tablet, och mobil).
-Semantisk HTML och WCAG-efterlevnad (alt-texter, färgkontrast, tydlig navigation).
+Designen anpassar sig efter olika skärmstorlekar (desktop, tablet, och mobil).
+Semantisk HTML och WCAG (alt-texter, färgkontrast, tydlig navigation).
 Feedback till användaren vid laddning av data, fel, eller tomma sökresultat.
-Sökningen är dynamisk och uppdateras direkt när användaren skriver.
+Sökningen är dynamisk och uppdateras direkt när man skriver.
 API-detaljer
 API: OMDb API
 Endpoint: https://www.omdbapi.com/
